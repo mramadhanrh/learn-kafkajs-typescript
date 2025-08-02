@@ -1,0 +1,23 @@
+{
+  "name": "learn-kafkajs-typescript",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run index.ts",
+    "dev": "nodemon --watch index.ts --watch src --ext ts --exec bun run index.ts",
+    "build": "tsc --project tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/express": "^5.0.3",
+    "nodemon": "^3.1.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "kafkajs": "^2.2.4"
+  }
+}
