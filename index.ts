@@ -1,13 +1,22 @@
-import express from "express";
-import { kafka } from "./src/kafka";
+import { createTopic } from "./src/kafka/createTopic";
+import { runConsumer } from "./src/kafka/runConsumer";
+import { runProducer } from "./src/kafka/runProducer";
 
-const app = express();
-const port = 3000;
+const runKafkaExample = async () => {
+  try {
+    const topicName = "example-topic";
 
-app.get("/", (_req, res) => {
-  res.send("Hello, Express!" + kafka);
-});
+    console.log(`Creating topic: ${topicName} - 📦`);
+    await createTopic(topicName);
 
-app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
-});
+    console.log(`Starting producer for topic: ${topicName} - 📡`);
+    await runProducer(topicName);
+
+    console.log(`Starting consumer for topic: ${topicName} - 📡`);
+    await runConsumer(topicName);
+  } catch (error) {
+    console.error(`Error in Kafka example: ${error} - ❌`);
+  }
+};
+
+runKafkaExample();

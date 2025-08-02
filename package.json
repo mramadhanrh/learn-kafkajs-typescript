@@ -5,8 +5,11 @@
   "private": true,
   "scripts": {
     "start": "bun run index.ts",
-    "dev": "nodemon --watch index.ts --watch src --ext ts --exec bun run index.ts",
-    "build": "tsc --project tsconfig.json"
+    "dev": "bun run docker:down && bun run docker:up && nodemon --watch index.ts --watch src --ext ts --exec bun run index.ts",
+    "build": "tsc --project tsconfig.json",
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f"
   },
   "devDependencies": {
     "@types/bun": "latest",
